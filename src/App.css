@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+.app {
+  display: flex;
+  align-items: center;
+  background-color: #12181b;
+  color: #fafafa;
+  font-size: 20px;
+  height: 100vh;
+  padding-top: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  margin: 0 auto;
+  max-width: 400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.board {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  font-size: 40px;
+  border: 1px groove #eeeeee;
 }
 
-.App-link {
-  color: #61dafb;
+.playerX {
+  color: #77d970;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.playerO {
+  color: #ff0075;
+}
+
+.button {
+  background-color: #172774;
+  color: #eeeeee;
+  padding: 5px 10px;
+  margin: 15px 0px;
+  border-radius: 3px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.winner-msg {
+  min-height: 30px;
 }
