@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useKresty = () => {
+const useKrest = () => {
   const [board, setBoard] = useState([
     ['', '', ''],
     ['', '', ''],
@@ -11,6 +11,7 @@ const useKresty = () => {
   const [winner, setWinner] = useState(null);
 
   const checkWinner = () => {
+    if (winner) return;
     // check row
     for (let row of board) {
       if (isWinCon(row)) return;
@@ -50,21 +51,23 @@ const useKresty = () => {
 
   // user move
   const onClick = (coords) => {
-    if (board[coords.i][coords.j] || winner) return;
-    if (coords) {
-      board[coords.i][coords.j] = 'X';
-      setBoard((board) => [...board]);
-      setTurn('O');
-    }
+    if (!coords || board[coords.i][coords.j] || winner) return;
+
+    board[coords.i][coords.j] = 'X';
+    setBoard((board) => [...board]);
+    checkWinner();
+    setTurn('O');
   };
 
   const cpuMove = () => {
+    if (winner) return;
+
     const cpuTurn = getCpuTurn();
-    if (cpuTurn) {
-      board[cpuTurn.i][cpuTurn.j] = 'O';
-      setBoard((board) => [...board]);
-      setTurn('X');
-    }
+    if (!cpuTurn) return;
+    board[cpuTurn.i][cpuTurn.j] = 'O';
+    setBoard((board) => [...board]);
+    checkWinner();
+    setTurn('X');
   };
 
   const getCpuTurn = () => {
@@ -88,12 +91,9 @@ const useKresty = () => {
     setTurn('X');
   };
 
-  useEffect(() => {
-    checkWinner();
-  }, [board]);
-
   // CPU move
   useEffect(() => {
+    if (winner) return;
     if (turn === 'O') {
       cpuMove();
     }
@@ -107,4 +107,4 @@ const useKresty = () => {
   };
 };
 
-export default useKresty;
+export default useKrest;
